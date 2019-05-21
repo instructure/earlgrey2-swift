@@ -10,8 +10,8 @@ class ElementId_Tests: SwiftUITestCase {
     }
 
     func test_elementId() {
-        XCTAssertTrue(LoginPage.resetPassword.rawValue == "resetPassword")
-        XCTAssertTrue(LoginPage.resetPassword.id == "LoginPage.resetPassword")
+        XCTAssertEqual(LoginPage.resetPassword.rawValue, "resetPassword")
+        XCTAssertEqual(LoginPage.resetPassword.id, "LoginPage.resetPassword")
 
         // we can find directly with the enum
         XCTAssertFalse(LoginPage.resetPassword.isVisibleNow)

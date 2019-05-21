@@ -19,7 +19,9 @@ public protocol Element {
     var label: String { get }
     var id: String { get }
     var elementType: String { get }
+    func pick(column: Int, value: String)
     func tap()
+    func tapAt(_ point: CGPoint)
     @discardableResult
     func waitToExist(_ timeout: Timeout) -> Bool
     func waitToVanish(_ timeout: Timeout)
@@ -36,6 +38,7 @@ public protocol Driver {
     func find(label: String, type: String) -> Element
     func find(id: String, type: String) -> Element
     func find<T: ElementWrapper>(_ elementId: T, type: String) -> Element
+    func find(value: String) -> Element
 
     func find(parentID: String, label: String) -> Element
     func find(parentID: String, type: String, index: Int) -> Element

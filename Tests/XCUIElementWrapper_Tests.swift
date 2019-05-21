@@ -6,13 +6,13 @@ class XCUIElementWrapper_Tests: SwiftUITestCase {
     func test_exists() {
         let label = "Accessibility Views"
         let ele = app.find(label: label)
-        XCTAssertTrue(ele.exists == true)
+        XCTAssertTrue(ele.exists)
     }
 
     func test_label() {
         let label = "Accessibility Views"
         let ele = app.find(label: label)
-        XCTAssertTrue(ele.label == label)
+        XCTAssertEqual(ele.label, label)
     }
 
     func test_id() {
@@ -20,7 +20,7 @@ class XCUIElementWrapper_Tests: SwiftUITestCase {
 
         let id = "gestureRegonizedLabel"
         let ele = app.find(id: id)
-        XCTAssertTrue(ele.id == id)
+        XCTAssertEqual(ele.id, id)
     }
 
     func test_elementType() {
@@ -48,13 +48,22 @@ class XCUIElementWrapper_Tests: SwiftUITestCase {
     func test_value() {
         let label = "Accessibility Views"
         let ele = app.find(label: label)
-        XCTAssertTrue(ele.value == "")
+        XCTAssertEqual(ele.value, "")
     }
 
     func test_isEnabled() {
         let label = "Accessibility Views"
         let ele = app.find(label: label)
         XCTAssertTrue(ele.isEnabled)
+    }
+
+    func test_pick() {
+        app.find(label: "Picker Views").tap()
+        app.find(label: "Counter").tap()
+        app.find(value: "1 min").pick(column: 0, value: "2 min")
+        XCTAssertTrue(app.find(value: "2 min").isVisible)
+
+        backButtonTap()
     }
 
     func test_tap() {
@@ -64,6 +73,18 @@ class XCUIElementWrapper_Tests: SwiftUITestCase {
 
         backButtonTap()
 
+        XCTAssertTrue(a11yButton.isVisible)
+    }
+
+    func test_tapAt() {
+        let a11yButton = app.find(label: "Accessibility Views")
+        a11yButton.tapAt(.zero)
+        XCTAssertFalse(a11yButton.isVisible)
+
+        backButtonTap()
+
+        XCTAssertTrue(a11yButton.isVisible)
+        a11yButton.tapAt(CGPoint(x: 9000, y: 9000))
         XCTAssertTrue(a11yButton.isVisible)
     }
 

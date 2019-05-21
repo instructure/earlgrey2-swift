@@ -59,9 +59,25 @@ struct XCUIElementWrapper: Element {
         return element.isEnabled
     }
 
+    func pick(column: Int, value: String) {
+        waitToExist(Timeout())
+        if element.elementType == .picker {
+            element.pickerWheels.allElementsBoundByIndex[column].adjust(toPickerWheelValue: value)
+        } else if element.elementType == .pickerWheel {
+            element.adjust(toPickerWheelValue: value)
+        }
+    }
+
     func tap() {
         waitToExist(Timeout())
         element.tap()
+    }
+
+    func tapAt(_ point: CGPoint) {
+        waitToExist(Timeout())
+        element.coordinate(withNormalizedOffset: .zero)
+            .withOffset(CGVector(dx: point.x, dy: point.y))
+            .tap()
     }
 
     func typeText(_ text: String) {
