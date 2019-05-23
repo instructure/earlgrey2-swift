@@ -1,20 +1,12 @@
 import Foundation
 import XCTest
 
-private enum ElementType : String, CaseIterable, CustomStringConvertible {
-    var description: String {
-        switch self {
-        case .segmentedControl: return "UISegment"
-        default:
-            return String(describing: self.rawValue)
-        }
-    }
-
+enum ElementType : String, CaseIterable {
     static var intToStr: [UInt: String] {
         var result = Dictionary<UInt, String>()
         var index = UInt(0)
         ElementType.allCases.forEach { (element) in
-            result[index] = element.description
+            result[index] = element.rawValue
             index += 1
         }
         return result
@@ -24,7 +16,7 @@ private enum ElementType : String, CaseIterable, CustomStringConvertible {
         var result = Dictionary<String, UInt>()
         var index = UInt(0)
         ElementType.allCases.forEach { (element) in
-            result[element.description] = index
+            result[element.rawValue] = index
             index += 1
         }
         return result
@@ -118,99 +110,100 @@ private enum ElementType : String, CaseIterable, CustomStringConvertible {
 // TODO: convert strings to/from XCUIElement.Types
 public struct XCElementType  {
     public static func from(_ type: String) -> XCUIElement.ElementType {
-        let found: ElementType  = ElementType.allCases.first { (ele) -> Bool in
-            return ele.description == type
-            } ?? ElementType.any
-
-        let keyNumber = ElementType.strToInt[found.description] ?? 0
+        let found: ElementType
+        switch type {
+        case "UISegment": found = .segmentedControl
+        default: found = ElementType(rawValue: type) ?? .any
+        }
+        let keyNumber = ElementType.strToInt[found.rawValue] ?? 0
         return XCUIElement.ElementType.init(rawValue: keyNumber) ?? XCUIElement.ElementType.any
     }
 
     public static func from(_ index: UInt) -> String {
-        return ElementType.intToStr[index] ?? ElementType.any.description
+        return ElementType.intToStr[index] ?? ElementType.any.rawValue
     }
 
-    public static let any: String = ElementType.any.description
-    public static let other: String = ElementType.other.description
-    public static let application: String = ElementType.application.description
-    public static let group: String = ElementType.group.description
-    public static let window: String = ElementType.window.description
-    public static let sheet: String = ElementType.sheet.description
-    public static let drawer: String = ElementType.drawer.description
-    public static let alert: String = ElementType.alert.description
-    public static let dialog: String = ElementType.dialog.description
-    public static let button: String = ElementType.button.description
-    public static let radioButton: String = ElementType.radioButton.description
-    public static let radioGroup: String = ElementType.radioGroup.description
-    public static let checkBox: String = ElementType.checkBox.description
-    public static let disclosureTriangle: String = ElementType.disclosureTriangle.description
-    public static let popUpButton: String = ElementType.popUpButton.description
-    public static let comboBox: String = ElementType.comboBox.description
-    public static let menuButton: String = ElementType.menuButton.description
-    public static let toolbarButton: String = ElementType.toolbarButton.description
-    public static let popover: String = ElementType.popover.description
-    public static let keyboard: String = ElementType.keyboard.description
-    public static let key: String = ElementType.key.description
-    public static let navigationBar: String = ElementType.navigationBar.description
-    public static let tabBar: String = ElementType.tabBar.description
-    public static let tabGroup: String = ElementType.tabGroup.description
-    public static let toolbar: String = ElementType.toolbar.description
-    public static let statusBar: String = ElementType.statusBar.description
-    public static let table: String = ElementType.table.description
-    public static let tableRow: String = ElementType.tableRow.description
-    public static let tableColumn: String = ElementType.tableColumn.description
-    public static let outline: String = ElementType.outline.description
-    public static let outlineRow: String = ElementType.outlineRow.description
-    public static let browser: String = ElementType.browser.description
-    public static let collectionView: String = ElementType.collectionView.description
-    public static let slider: String = ElementType.slider.description
-    public static let pageIndicator: String = ElementType.pageIndicator.description
-    public static let progressIndicator: String = ElementType.progressIndicator.description
-    public static let activityIndicator: String = ElementType.activityIndicator.description
-    public static let segmentedControl: String = ElementType.segmentedControl.description
-    public static let picker: String = ElementType.picker.description
-    public static let pickerWheel: String = ElementType.pickerWheel.description
-    public static let `switch`: String = ElementType.switch.description
-    public static let toggle: String = ElementType.toggle.description
-    public static let link: String = ElementType.link.description
-    public static let image: String = ElementType.image.description
-    public static let icon: String = ElementType.icon.description
-    public static let searchField: String = ElementType.searchField.description
-    public static let scrollView: String = ElementType.scrollView.description
-    public static let scrollBar: String = ElementType.scrollBar.description
-    public static let staticText: String = ElementType.staticText.description
-    public static let textField: String = ElementType.textField.description
-    public static let secureTextField: String = ElementType.secureTextField.description
-    public static let datePicker: String = ElementType.datePicker.description
-    public static let textView: String = ElementType.textView.description
-    public static let menu: String = ElementType.menu.description
-    public static let menuItem: String = ElementType.menuItem.description
-    public static let menuBar: String = ElementType.menuBar.description
-    public static let menuBarItem: String = ElementType.menuBarItem.description
-    public static let map: String = ElementType.map.description
-    public static let webView: String = ElementType.webView.description
-    public static let incrementArrow: String = ElementType.incrementArrow.description
-    public static let decrementArrow: String = ElementType.decrementArrow.description
-    public static let timeline: String = ElementType.timeline.description
-    public static let ratingIndicator: String = ElementType.ratingIndicator.description
-    public static let valueIndicator: String = ElementType.valueIndicator.description
-    public static let splitGroup: String = ElementType.splitGroup.description
-    public static let splitter: String = ElementType.splitter.description
-    public static let relevanceIndicator: String = ElementType.relevanceIndicator.description
-    public static let colorWell: String = ElementType.colorWell.description
-    public static let helpTag: String = ElementType.helpTag.description
-    public static let matte: String = ElementType.matte.description
-    public static let dockItem: String = ElementType.dockItem.description
-    public static let ruler: String = ElementType.ruler.description
-    public static let rulerMarker: String = ElementType.rulerMarker.description
-    public static let grid: String = ElementType.grid.description
-    public static let levelIndicator: String = ElementType.levelIndicator.description
-    public static let cell: String = ElementType.cell.description
-    public static let layoutArea: String = ElementType.layoutArea.description
-    public static let layoutItem: String = ElementType.layoutItem.description
-    public static let handle: String = ElementType.handle.description
-    public static let stepper: String = ElementType.stepper.description
-    public static let tab: String = ElementType.tab.description
-    public static let touchBar: String = ElementType.touchBar.description
-    public static let statusItem: String = ElementType.statusItem.description
+    public static let any: String = ElementType.any.rawValue
+    public static let other: String = ElementType.other.rawValue
+    public static let application: String = ElementType.application.rawValue
+    public static let group: String = ElementType.group.rawValue
+    public static let window: String = ElementType.window.rawValue
+    public static let sheet: String = ElementType.sheet.rawValue
+    public static let drawer: String = ElementType.drawer.rawValue
+    public static let alert: String = ElementType.alert.rawValue
+    public static let dialog: String = ElementType.dialog.rawValue
+    public static let button: String = ElementType.button.rawValue
+    public static let radioButton: String = ElementType.radioButton.rawValue
+    public static let radioGroup: String = ElementType.radioGroup.rawValue
+    public static let checkBox: String = ElementType.checkBox.rawValue
+    public static let disclosureTriangle: String = ElementType.disclosureTriangle.rawValue
+    public static let popUpButton: String = ElementType.popUpButton.rawValue
+    public static let comboBox: String = ElementType.comboBox.rawValue
+    public static let menuButton: String = ElementType.menuButton.rawValue
+    public static let toolbarButton: String = ElementType.toolbarButton.rawValue
+    public static let popover: String = ElementType.popover.rawValue
+    public static let keyboard: String = ElementType.keyboard.rawValue
+    public static let key: String = ElementType.key.rawValue
+    public static let navigationBar: String = ElementType.navigationBar.rawValue
+    public static let tabBar: String = ElementType.tabBar.rawValue
+    public static let tabGroup: String = ElementType.tabGroup.rawValue
+    public static let toolbar: String = ElementType.toolbar.rawValue
+    public static let statusBar: String = ElementType.statusBar.rawValue
+    public static let table: String = ElementType.table.rawValue
+    public static let tableRow: String = ElementType.tableRow.rawValue
+    public static let tableColumn: String = ElementType.tableColumn.rawValue
+    public static let outline: String = ElementType.outline.rawValue
+    public static let outlineRow: String = ElementType.outlineRow.rawValue
+    public static let browser: String = ElementType.browser.rawValue
+    public static let collectionView: String = ElementType.collectionView.rawValue
+    public static let slider: String = ElementType.slider.rawValue
+    public static let pageIndicator: String = ElementType.pageIndicator.rawValue
+    public static let progressIndicator: String = ElementType.progressIndicator.rawValue
+    public static let activityIndicator: String = ElementType.activityIndicator.rawValue
+    public static let segmentedControl: String = ElementType.segmentedControl.rawValue
+    public static let picker: String = ElementType.picker.rawValue
+    public static let pickerWheel: String = ElementType.pickerWheel.rawValue
+    public static let `switch`: String = ElementType.switch.rawValue
+    public static let toggle: String = ElementType.toggle.rawValue
+    public static let link: String = ElementType.link.rawValue
+    public static let image: String = ElementType.image.rawValue
+    public static let icon: String = ElementType.icon.rawValue
+    public static let searchField: String = ElementType.searchField.rawValue
+    public static let scrollView: String = ElementType.scrollView.rawValue
+    public static let scrollBar: String = ElementType.scrollBar.rawValue
+    public static let staticText: String = ElementType.staticText.rawValue
+    public static let textField: String = ElementType.textField.rawValue
+    public static let secureTextField: String = ElementType.secureTextField.rawValue
+    public static let datePicker: String = ElementType.datePicker.rawValue
+    public static let textView: String = ElementType.textView.rawValue
+    public static let menu: String = ElementType.menu.rawValue
+    public static let menuItem: String = ElementType.menuItem.rawValue
+    public static let menuBar: String = ElementType.menuBar.rawValue
+    public static let menuBarItem: String = ElementType.menuBarItem.rawValue
+    public static let map: String = ElementType.map.rawValue
+    public static let webView: String = ElementType.webView.rawValue
+    public static let incrementArrow: String = ElementType.incrementArrow.rawValue
+    public static let decrementArrow: String = ElementType.decrementArrow.rawValue
+    public static let timeline: String = ElementType.timeline.rawValue
+    public static let ratingIndicator: String = ElementType.ratingIndicator.rawValue
+    public static let valueIndicator: String = ElementType.valueIndicator.rawValue
+    public static let splitGroup: String = ElementType.splitGroup.rawValue
+    public static let splitter: String = ElementType.splitter.rawValue
+    public static let relevanceIndicator: String = ElementType.relevanceIndicator.rawValue
+    public static let colorWell: String = ElementType.colorWell.rawValue
+    public static let helpTag: String = ElementType.helpTag.rawValue
+    public static let matte: String = ElementType.matte.rawValue
+    public static let dockItem: String = ElementType.dockItem.rawValue
+    public static let ruler: String = ElementType.ruler.rawValue
+    public static let rulerMarker: String = ElementType.rulerMarker.rawValue
+    public static let grid: String = ElementType.grid.rawValue
+    public static let levelIndicator: String = ElementType.levelIndicator.rawValue
+    public static let cell: String = ElementType.cell.rawValue
+    public static let layoutArea: String = ElementType.layoutArea.rawValue
+    public static let layoutItem: String = ElementType.layoutItem.rawValue
+    public static let handle: String = ElementType.handle.rawValue
+    public static let stepper: String = ElementType.stepper.rawValue
+    public static let tab: String = ElementType.tab.rawValue
+    public static let touchBar: String = ElementType.touchBar.rawValue
+    public static let statusItem: String = ElementType.statusItem.rawValue
 }
