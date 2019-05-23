@@ -54,6 +54,10 @@ public extension ElementWrapper {
         return element.isEnabled
     }
 
+    var isEnabledNow: Bool {
+        return element.isEnabledNow
+    }
+
     func tap() {
         element.tap()
     }

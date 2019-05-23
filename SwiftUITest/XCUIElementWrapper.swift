@@ -55,6 +55,10 @@ struct XCUIElementWrapper: Element {
         return element.isEnabled
     }
 
+    var isEnabledNow: Bool {
+        return element.isEnabled
+    }
+
     func tap() {
         waitToExist(Timeout())
         element.tap()

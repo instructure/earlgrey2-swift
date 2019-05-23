@@ -15,6 +15,7 @@ public protocol Element {
     var isVisibleNow: Bool { get }
     var value: String { get }
     var isEnabled: Bool { get }
+    var isEnabledNow: Bool { get }
     var label: String { get }
     var id: String { get }
     var elementType: String { get }
