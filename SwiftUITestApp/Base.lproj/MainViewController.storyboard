@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MainViewController" customModule="SwiftUITestApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LZe-fZ-zRg">
+                                <rect key="frame" x="16" y="20" width="343" height="22"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Main.label"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WXa-Pj-ico">
+                                <rect key="frame" x="16" y="50" width="343" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xa3-U9-2IJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="167.5" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" hint="hint" identifier="Main.button"/>
+                                        <state key="normal" title="button"/>
+                                        <connections>
+                                            <action selector="buttonTap" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="7u8-Ik-gT3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5PW-tc-AeK">
+                                        <rect key="frame" x="175.5" y="0.0" width="167.5" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" hint="hint" identifier="Main.buttonDisabled" label="label"/>
+                                        <state key="normal" title="disabled"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="uDP-rc-nwc">
+                                <rect key="frame" x="16" y="88" width="343" height="29"/>
+                                <segments>
+                                    <segment title="first"/>
+                                    <segment title="second"/>
+                                    <segment title="third" enabled="NO"/>
+                                </segments>
+                            </segmentedControl>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYE-2K-wn7">
+                                <rect key="frame" x="0.0" y="124" width="375" height="162"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Main.picker">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="162" id="EZ2-pJ-aWw"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="4ic-Lh-E7g"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="xVu-yr-2Y8"/>
+                                </connections>
+                            </pickerView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Text Field" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fGZ-Gy-9Ov">
+                                <rect key="frame" x="16" y="294" width="343" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Main.textField"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hidden" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlm-1W-DkK">
+                                <rect key="frame" x="306.5" y="20" width="52.5" height="20.5"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Main.hidden"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Li-53-gNr">
+                                <rect key="frame" x="16" y="20" width="35" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="reset"/>
+                                <state key="normal" title="reset"/>
+                                <connections>
+                                    <action selector="reset" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="Hku-lY-t9b"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="uDP-rc-nwc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="26h-lu-Vq8"/>
+                            <constraint firstItem="Zlm-1W-DkK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="4j0-5c-eEC"/>
+                            <constraint firstItem="5Li-53-gNr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6Qp-PT-kWp"/>
+                            <constraint firstItem="fGZ-Gy-9Ov" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="7hp-3i-jBK"/>
+                            <constraint firstItem="LZe-fZ-zRg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Bbg-NE-Ela"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Zlm-1W-DkK" secondAttribute="trailing" constant="16" id="Bu0-i2-qZe"/>
+                            <constraint firstItem="lYE-2K-wn7" firstAttribute="top" secondItem="uDP-rc-nwc" secondAttribute="bottom" constant="8" id="HI9-tp-9ha"/>
+                            <constraint firstItem="LZe-fZ-zRg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="N5z-8i-BC1"/>
+                            <constraint firstItem="uDP-rc-nwc" firstAttribute="top" secondItem="WXa-Pj-ico" secondAttribute="bottom" constant="8" id="PXL-Pn-6ZD"/>
+                            <constraint firstItem="Zlm-1W-DkK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="RCA-LQ-ojN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WXa-Pj-ico" secondAttribute="trailing" constant="16" id="SOe-cS-njc"/>
+                            <constraint firstItem="WXa-Pj-ico" firstAttribute="top" secondItem="LZe-fZ-zRg" secondAttribute="bottom" constant="8" id="V25-K5-KDr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="LZe-fZ-zRg" secondAttribute="trailing" constant="16" id="XET-tC-KnH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5Li-53-gNr" secondAttribute="trailing" constant="16" id="a58-G6-UmR"/>
+                            <constraint firstItem="lYE-2K-wn7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bY0-T5-xsB"/>
+                            <constraint firstItem="lYE-2K-wn7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="mo2-dq-SBq"/>
+                            <constraint firstItem="fGZ-Gy-9Ov" firstAttribute="top" secondItem="lYE-2K-wn7" secondAttribute="bottom" constant="8" id="pJx-Ay-vXm"/>
+                            <constraint firstItem="WXa-Pj-ico" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="rZD-s2-l3T"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fGZ-Gy-9Ov" secondAttribute="trailing" constant="16" id="reQ-7f-CIv"/>
+                            <constraint firstItem="5Li-53-gNr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="tqk-ZM-v4q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="uDP-rc-nwc" secondAttribute="trailing" constant="16" id="uvM-fL-vsC"/>
+                            <constraint firstItem="WXa-Pj-ico" firstAttribute="top" secondItem="5Li-53-gNr" secondAttribute="bottom" id="vqC-Xp-ueb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="button" destination="xa3-U9-2IJ" id="1hF-zs-V83"/>
+                        <outlet property="picker" destination="lYE-2K-wn7" id="JvS-Ei-Ehy"/>
+                        <outlet property="segmented" destination="uDP-rc-nwc" id="CKe-y4-dNh"/>
+                        <outlet property="textField" destination="fGZ-Gy-9Ov" id="s8t-U7-V6w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="56.799999999999997" y="26.53673163418291"/>
+        </scene>
+    </scenes>
+</document>

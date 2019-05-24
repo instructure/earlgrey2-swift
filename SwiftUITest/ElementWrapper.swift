@@ -86,7 +86,7 @@ public extension ElementWrapper {
         return element.waitToExist(timeout)
     }
 
-    func waitToVanish(_ timeout: Timeout) {
+    func waitToVanish(_ timeout: Timeout) -> Bool {
         return element.waitToVanish(timeout)
     }
 }

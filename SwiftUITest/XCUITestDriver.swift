@@ -74,14 +74,6 @@ struct XCUITestDriver: Driver {
         return find(id: elementId.id, type: type)
     }
 
-    func find(value: String) -> Element {
-        return app
-            .descendants(matching: .any)
-            .matching(NSPredicate(format: "%K == %@", #keyPath(XCUIElement.value), value))
-            .firstMatch
-            .toElement(testCase)
-    }
-
     func find(parentID: String, label: String) -> Element {
         let element = _find(id: parentID, type: XCElementType.any)
         return element.descendants(matching: .any)

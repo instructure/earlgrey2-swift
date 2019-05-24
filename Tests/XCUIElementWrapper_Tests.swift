@@ -2,128 +2,103 @@ import XCTest
 import SwiftUITest
 
 class XCUIElementWrapper_Tests: SwiftUITestCase {
+    lazy var button = app.find(id: "Main.button")
+    lazy var buttonDisabled = app.find(id: "Main.buttonDisabled")
+    lazy var hidden = app.find(id: "Main.hidden")
+    lazy var label = app.find(id: "Main.label")
+    lazy var missing = app.find(id: "missing")
+    lazy var picker = app.find(id: "Main.picker")
+    lazy var textField = app.find(id: "Main.textField")
 
     func test_exists() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label)
-        XCTAssertTrue(ele.exists)
+        XCTAssertTrue(button.exists)
+        XCTAssertFalse(missing.exists)
     }
 
     func test_label() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label)
-        XCTAssertEqual(ele.label, label)
+        XCTAssertEqual(button.label, "button")
+        XCTAssertEqual(label.label, "text")
     }
 
     func test_id() {
-        app.find(label: "Multi finger swipe gestures").tap()
-
-        let id = "gestureRegonizedLabel"
-        let ele = app.find(id: id)
-        XCTAssertEqual(ele.id, id)
+        XCTAssertEqual(button.id, "Main.button")
     }
 
     func test_elementType() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label)
-        XCTAssertEqual(ele.elementType, XCElementType.staticText)
-        XCTAssertEqual(ele.elementType, "staticText")
+        XCTAssertEqual(button.elementType, XCElementType.button)
+        XCTAssertEqual(label.elementType, XCElementType.staticText)
     }
 
     func test_isVisible() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label)
-        XCTAssertTrue(ele.isVisible)
+        XCTAssertTrue(label.isVisible)
+        XCTAssertFalse(hidden.isVisible)
+        XCTAssertFalse(missing.isVisible)
     }
 
     func test_isVisibleNow() {
-        let label = "Accessibility Views"
-        var ele = app.find(label: label)
-        XCTAssertTrue(ele.isVisibleNow)
-
-        ele = app.find(label: "does not exist")
-        XCTAssertFalse(ele.isVisibleNow)
+        XCTAssertTrue(label.isVisibleNow)
+        XCTAssertFalse(hidden.isVisibleNow)
+        XCTAssertFalse(missing.isVisibleNow)
     }
 
     func test_value() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label)
-        XCTAssertEqual(ele.value, "")
+        XCTAssertEqual(button.value, "value")
+        XCTAssertEqual(buttonDisabled.value, "")
     }
 
     func test_isEnabled() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label)
-        XCTAssertTrue(ele.isEnabled)
+        XCTAssertTrue(button.isEnabled)
+        XCTAssertFalse(buttonDisabled.isEnabled)
+    }
+
+    func test_isEnabledNow() {
+        XCTAssertTrue(button.isEnabledNow)
+        XCTAssertFalse(buttonDisabled.isEnabledNow)
     }
 
     func test_pick() {
-        app.find(label: "Picker Views").tap()
-        app.find(label: "Counter").tap()
-        app.find(value: "1 min").pick(column: 0, value: "2 min")
-        XCTAssertTrue(app.find(value: "2 min").isVisible)
-
-        backButtonTap()
+        picker.pick(column: 0, value: "B")
+        picker.pick(column: 1, value: "4")
     }
 
     func test_tap() {
-        let a11yButton = app.find(label: "Accessibility Views")
-        XCTAssertTrue(a11yButton.isVisible)
-        a11yButton.tap()
-
-        backButtonTap()
-
-        XCTAssertTrue(a11yButton.isVisible)
+        XCTAssertEqual(button.label, "button")
+        button.tap()
+        XCTAssertEqual(button.label, "button (1)")
+        button.tap()
+        button.tap()
+        XCTAssertEqual(button.label, "button (3)")
     }
 
     func test_tapAt() {
-        let a11yButton = app.find(label: "Accessibility Views")
-        a11yButton.tapAt(.zero)
-        XCTAssertFalse(a11yButton.isVisible)
-
-        backButtonTap()
-
-        XCTAssertTrue(a11yButton.isVisible)
-        a11yButton.tapAt(CGPoint(x: 9000, y: 9000))
-        XCTAssertTrue(a11yButton.isVisible)
+        XCTAssertEqual(button.label, "button")
+        button.tapAt(.zero)
+        XCTAssertEqual(button.label, "button (1)")
+        button.tapAt(CGPoint(x: 10, y: 10))
+        button.tapAt(CGPoint(x: 9000, y: 9000))
+        XCTAssertEqual(button.label, "button (2)")
     }
 
     func test_typeText() {
-        app.find(type: XCElementType.table).swipeUp()
-        app.find(label: "Typing Views").tap()
-
-        let textfield = app.find(id: "TypingTextField")
-        let text = "hello there"
-        textfield.tap()
-        textfield.typeText(text)
-        XCTAssertTrue(textfield.value == text)
-
-        // scroll back to top
-        backButtonTap()
-        app.find(type: XCElementType.table).swipeDown()
-        app.find(type: XCElementType.table).swipeDown()
+        textField.typeText("fhqwhgads")
+        XCTAssertEqual(textField.value, "fhqwhgads")
     }
 
     func test_swipeDown() {
-        app.find(type: XCElementType.table).swipeDown()
+        XCTAssertNoThrow(picker.swipeDown())
     }
 
     func test_swipeUp() {
-        app.find(type: XCElementType.table).swipeUp()
+        XCTAssertNoThrow(picker.swipeUp())
     }
 
     func test_waitToExist() {
-        let a11yButton = app.find(label: "Accessibility Views")
-        a11yButton.waitToExist(Timeout())
-        XCTAssertTrue(a11yButton.isVisible)
+        XCTAssertTrue(button.waitToExist(Timeout()))
+        XCTAssertFalse(missing.waitToExist(Timeout(value: 1)))
     }
 
     func test_waitToVanish() {
-        let a11yButton = app.find(label: "Accessibility Views")
-        a11yButton.tap()
-        a11yButton.waitToVanish(Timeout())
-
-        backButtonTap()
-        XCTAssertTrue(a11yButton.isVisible)
+        XCTAssertTrue(missing.waitToVanish(Timeout()))
+        XCTAssertFalse(button.waitToVanish(Timeout(value: 1)))
     }
 }

@@ -2,7 +2,6 @@ import XCTest
 import SwiftUITest
 
 class XCUITestDriver_Tests: SwiftUITestCase {
-
     func test_swipeDown() {
         app.swipeDown()
     }
@@ -12,61 +11,48 @@ class XCUITestDriver_Tests: SwiftUITestCase {
     }
 
     func test_find_label() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label)
-        XCTAssertTrue(ele.label == label)
+        XCTAssertEqual(app.find(label: "first").label, "first")
     }
     
     func test_find_id() {
-        app.find(label: "Multi finger swipe gestures").tap()
-        
-        let id = "gestureRegonizedLabel"
-        let ele = app.find(id: id)
-        XCTAssertTrue(ele.id == id)
-        
-        backButtonTap()
+        XCTAssertEqual(app.find(id: "Main.label").id, "Main.label")
     }
 
-    func test_find_elementId() {
-         XCTAssertFalse(app.find(ElementId_Tests.LoginPage.resetPassword).isVisibleNow)
+    func test_find_elementWrapper() {
+         XCTAssertTrue(app.find(Main.button).isVisibleNow)
     }
 
     func test_find_type() {
-        let ele = app.find(type: XCElementType.table)
-        XCTAssertTrue(ele.elementType == XCElementType.table)
+        XCTAssertEqual(app.find(type: XCElementType.button).elementType, XCElementType.button)
+        XCTAssertEqual(app.find(type: XCElementType.picker).elementType, XCElementType.picker)
+        XCTAssertEqual(app.find(type: XCElementType.staticText).elementType, XCElementType.staticText)
+        XCTAssertEqual(app.find(type: XCElementType.textField).elementType, XCElementType.textField)
     }
 
     func test_find_label_type() {
-        let label = "Accessibility Views"
-        let ele = app.find(label: label, type: XCElementType.staticText)
-        XCTAssertTrue(ele.label == label)
-        XCTAssertTrue(ele.elementType == XCElementType.staticText)
+        let element = app.find(label: "text", type: XCElementType.staticText)
+        XCTAssertEqual(element.label, "text")
+        XCTAssertEqual(element.elementType, XCElementType.staticText)
     }
 
     func test_find_id_type() {
-        app.find(label: "Multi finger swipe gestures").tap()
-
-        let id = "gestureRegonizedLabel"
-        let ele = app.find(id: id, type: XCElementType.staticText)
-        XCTAssertTrue(ele.id == id)
-        XCTAssertTrue(ele.elementType == XCElementType.staticText)
-
-        backButtonTap()
+        let element = app.find(id: "Main.button", type: XCElementType.button)
+        XCTAssertEqual(element.id, "Main.button")
+        XCTAssertEqual(element.elementType, XCElementType.button)
     }
 
-    func test_find_elementId_type() {
-        XCTAssertFalse(app.find(ElementId_Tests.LoginPage.resetPassword, type: XCElementType.any).isVisibleNow)
+    func test_find_elementWrapper_type() {
+        let element = app.find(Main.button, type: XCElementType.button)
+        XCTAssertEqual(element.elementType, XCElementType.button)
     }
 
     func test_find_parentID_label() {
-        let testApp = "EarlGrey TestApp"
-        let child = app.find(parentID: testApp, label: testApp)
-        XCTAssertTrue(child.label == testApp)
+        let child = app.find(parentID: "Main.segmented", label: "second")
+        XCTAssertEqual(child.label, "second")
     }
 
     func test_find_parentID_type_index() {
-        let testApp = "EarlGrey TestApp"
-        let child = app.find(parentID: testApp, type: XCElementType.any, index: 0)
-        XCTAssertTrue(child.label == testApp)
+        let child = app.find(parentID: "Main.segmented", type: XCElementType.button, index: 0)
+        XCTAssertEqual(child.label, "first")
     }
 }

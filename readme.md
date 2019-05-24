@@ -1,18 +1,15 @@
 # Swift UI testing framework
 
-Provides a pluggable abstraction over XCUITest and eventually EarlGrey.
-This allows changing UI test frameworks without having to rewrite tests.
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-success.svg)](https://github.com/Carthage/Carthage)
 
-- `brew install carthage`
-- `carthage bootstrap`
+Provides a pluggable abstraction over XCUITest to allows changing UI test frameworks (like EarlGrey) without having to rewrite tests.
+
+This only comes with a XCUITest driver. You need to bring your own `Driver` implementation to swap it out.
 
 ## Developing SwiftUITest
 
-Run `FunctionalTestRig` once to get it installed on the simulator.
-
+- `brew install carthage`
 - `carthage bootstrap --no-build`
-- `open Carthage/Checkouts/EarlGrey/Tests/Functional/FunctionalTests.xcodeproj`
-- Run `FunctionalTestRig`
 
 ## Usage
 
@@ -28,6 +25,6 @@ Reference `SwiftUITest.framework` built by Carthage.
 
 ## To Do
 
-- [ ] Move helper methods into SwiftUITest framework
+- [x] Move helper methods into SwiftUITest framework
 - [x] Write tests for the helper methods using `EarlGrey/Tests/FunctionalTests`
 - [ ] Update `canvas-ios` to use the new helpers

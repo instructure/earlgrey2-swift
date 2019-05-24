@@ -40,10 +40,6 @@ struct EarlGreyDriver: Driver {
         fatalError("not implemented")
     }
 
-    func find(value: String) -> Element {
-        fatalError("not implemented")
-    }
-
     func find(parentID: String, label: String) -> Element {
         fatalError("not implemented")
     }

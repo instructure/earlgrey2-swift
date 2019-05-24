@@ -2,7 +2,6 @@ import XCTest
 @testable import SwiftUITest
 
 class XCElementType_Tests: SwiftUITestCase {
-
     func test_ElementType_to_string() {
         XCTAssertEqual(XCElementType.any, ElementType.any.rawValue)
         XCTAssertEqual(XCElementType.other, ElementType.other.rawValue)
