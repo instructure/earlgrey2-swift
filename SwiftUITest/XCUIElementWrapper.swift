@@ -95,6 +95,7 @@ struct XCUIElementWrapper: Element {
     @discardableResult
     func waitToExist(_ timeout: Timeout) -> Bool {
         // TODO: Wait for no more network activity, etc.
+        if (element.exists) { return true; }
         return element.waitForExistence(timeout: timeout.value)
     }
 
