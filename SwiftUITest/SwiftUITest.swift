@@ -50,8 +50,4 @@ public struct DriverFactory {
     public static func getXCUITestDriver(_ app: XCUIApplication, testCase: XCTestCase) -> Driver {
         return XCUITestDriver(app, testCase)
     }
-    
-    public static func getEarlGreyDriver() -> Driver {
-        return EarlGreyDriver()
-    }
 }

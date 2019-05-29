@@ -17,7 +17,6 @@
 		F94ED112227CE4F40021E606 /* ElementWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94ED111227CE4F40021E606 /* ElementWrapper.swift */; };
 		F94ED114227CE53B0021E606 /* ElementWrapper_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94ED113227CE53B0021E606 /* ElementWrapper_Tests.swift */; };
 		F991CE25226E278200A11C56 /* SwiftUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991CE24226E278200A11C56 /* SwiftUITest.swift */; };
-		F991CE27226E2A1400A11C56 /* EarlGreyDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991CE26226E2A1400A11C56 /* EarlGreyDriver.swift */; };
 		F991CE29226E2A4600A11C56 /* XCUITestDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991CE28226E2A4600A11C56 /* XCUITestDriver.swift */; };
 		F991CE31226F5E6C00A11C56 /* XCUITestDriver_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991CE30226F5E6C00A11C56 /* XCUITestDriver_Tests.swift */; };
 		F991CE39226F61F600A11C56 /* SwiftUITest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9F6BDE9226E271D0089A0C0 /* SwiftUITest.framework */; };
@@ -50,7 +49,6 @@
 		F94ED111227CE4F40021E606 /* ElementWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementWrapper.swift; sourceTree = "<group>"; };
 		F94ED113227CE53B0021E606 /* ElementWrapper_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementWrapper_Tests.swift; sourceTree = "<group>"; };
 		F991CE24226E278200A11C56 /* SwiftUITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUITest.swift; sourceTree = "<group>"; };
-		F991CE26226E2A1400A11C56 /* EarlGreyDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarlGreyDriver.swift; sourceTree = "<group>"; };
 		F991CE28226E2A4600A11C56 /* XCUITestDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUITestDriver.swift; sourceTree = "<group>"; };
 		F991CE2E226F5E6C00A11C56 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F991CE30226F5E6C00A11C56 /* XCUITestDriver_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCUITestDriver_Tests.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 		F9F6BDEB226E271D0089A0C0 /* SwiftUITest */ = {
 			isa = PBXGroup;
 			children = (
-				F991CE26226E2A1400A11C56 /* EarlGreyDriver.swift */,
 				F94ED111227CE4F40021E606 /* ElementWrapper.swift */,
 				F9F6BDED226E271D0089A0C0 /* Info.plist */,
 				F9F6BDEC226E271D0089A0C0 /* SwiftUITest.h */,
@@ -321,7 +318,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F991CE27226E2A1400A11C56 /* EarlGreyDriver.swift in Sources */,
 				F991CE25226E278200A11C56 /* SwiftUITest.swift in Sources */,
 				F94ED112227CE4F40021E606 /* ElementWrapper.swift in Sources */,
 				F9E3BD252284E0500007A7A0 /* XCElementType.swift in Sources */,
